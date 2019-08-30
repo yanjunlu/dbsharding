@@ -5,6 +5,7 @@
 <mapper namespace="com.example.demo.dao.OrderDao">
     <resultMap id="BaseResultMap" type="com.example.demo.entity.Order" >
         <result column="order_id" property="orderId" jdbcType="DECIMAL" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="getById" resultMap="BaseResultMap">
@@ -13,4 +14,8 @@
     <select id="getOrderList" resultMap="BaseResultMap">
         SELECT * FROM t_order WHERE order_id >= #{orderId} order by order_id desc limit 1;
     </select>
+
+    <update id="updateById">
+        update t_order set remark=remark where order_id = #{orderId}
+    </update>
 </mapper>

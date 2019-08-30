@@ -3,6 +3,8 @@ package com.example.demo.entity;
 public class Order {
     private long orderId;
 
+    private String remark;
+
     public long getOrderId() {
         return orderId;
     }
@@ -11,4 +13,11 @@ public class Order {
         this.orderId = orderId;
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 }

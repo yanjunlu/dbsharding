@@ -7,27 +7,63 @@
 server:
     port: 8088
 
+##分库分表
+#spring:
+#    shardingsphere:
+#        props:
+#            sql:
+#                show: true
+#        datasource:
+#            ds0:
+#                type: com.zaxxer.hikari.HikariDataSource
+#                driver-class-name: com.mysql.cj.jdbc.Driver
+#                jdbc-url: jdbc:mysql://localhost:3306/ds0?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+#                username: root
+#                password: 'root'
+#            names: ds0
+#        sharding:
+#            tables:
+#                t_order:
+#                    actual-data-nodes: ds0.t_order$->{0..1}
+#                    table-strategy:
+#                        inline:
+#                            algorithm-expression: t_order$->{order_id % 2}
+#                            sharding-column: order_id
+
+##分库分表+读写分离
 spring:
     shardingsphere:
         props:
             sql:
                 show: true
         datasource:
-            ds0:
+            names: master,slave
+            master:
                 type: com.zaxxer.hikari.HikariDataSource
                 driver-class-name: com.mysql.cj.jdbc.Driver
-                jdbc-url: jdbc:mysql://localhost:3306/ds0?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+                jdbc-url: jdbc:mysql://localhost:3306/master?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
                 username: root
                 password: 'root'
-            names: ds0
+            slave:
+                type: com.zaxxer.hikari.HikariDataSource
+                driver-class-name: com.mysql.cj.jdbc.Driver
+                jdbc-url: jdbc:mysql://localhost:3306/slave?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+                username: root
+                password: 'root'
+
         sharding:
             tables:
                 t_order:
-                    actual-data-nodes: ds0.t_order$->{0..1}
+                    actual-data-nodes: ds.t_order$->{0..1}
                     table-strategy:
                         inline:
                             algorithm-expression: t_order$->{order_id % 2}
                             sharding-column: order_id
+
+            master-slave-rules:
+                ds:
+                    master-data-source-name: master
+                    slave-data-source-names: slave
 
 mybatis:
     mapper-locations: classpath:mapper/*.xml

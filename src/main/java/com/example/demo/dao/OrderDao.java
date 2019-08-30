@@ -12,4 +12,6 @@ public interface OrderDao {
     Order getById(@Param("orderId") long orderId);
 
     List<Order> getOrderList(@Param("orderId") long orderId);
+
+    int updateById(long orderId);
 }
