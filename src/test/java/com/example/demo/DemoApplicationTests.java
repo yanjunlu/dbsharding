@@ -57,5 +57,8 @@ public class DemoApplicationTests {
         assertTrue(list.size() > 0);
         System.out.println(list.get(0).getOrderId());
 
+        List<Integer> listTest = orderService.getTest();
+        assertTrue(listTest.size() > 0);
+
     }
 }

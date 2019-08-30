@@ -31,4 +31,9 @@ public class OrderService {
         Order order = orderDao.getById(orderId);
         return  order;
     }
+
+    public List<Integer> getTest(){
+        List<Integer> list = orderDao.getTest();
+        return  list;
+    }
 }

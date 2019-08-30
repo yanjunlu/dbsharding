@@ -14,4 +14,6 @@ public interface OrderDao {
     List<Order> getOrderList(@Param("orderId") long orderId);
 
     int updateById(long orderId);
+
+    List<Integer> getTest();
 }
