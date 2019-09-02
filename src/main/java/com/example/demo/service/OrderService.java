@@ -3,6 +3,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.OrderDao;
 import com.example.demo.entity.Order;
+import com.example.demo.entity.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,11 @@ public class OrderService {
 
     public List<Integer> getTest(){
         List<Integer> list = orderDao.getTest();
+        return  list;
+    }
+
+    public List<OrderItem> getOrderItemByOrderId(long orderId){
+        List<OrderItem> list = orderDao.getOrderItemByOrderId(orderId);
         return  list;
     }
 }

@@ -8,11 +8,21 @@
         <result column="remark" property="remark" jdbcType="VARCHAR" />
     </resultMap>
 
+    <resultMap id="OrderItemResultMap" type="com.example.demo.entity.OrderItem" >
+        <result column="order_item_id" property="orderItemId" jdbcType="DECIMAL" />
+        <result column="order_id" property="orderId" jdbcType="DECIMAL" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="getOrderItemByOrderId" resultMap="OrderItemResultMap">
+        SELECT a.* FROM t_order_item a, t_order b WHERE a.order_id = b.order_id and a.order_id = #{orderId} order by order_item_id;
+    </select>
+
     <select id="getById" resultMap="BaseResultMap">
         SELECT * FROM t_order WHERE order_id = #{orderId}
     </select>
     <select id="getOrderList" resultMap="BaseResultMap">
-        SELECT * FROM t_order WHERE order_id >= #{orderId} order by order_id desc limit 1;
+        SELECT * FROM t_order WHERE order_id >= #{orderId} order by order_id desc;
     </select>
 
     <update id="updateById">

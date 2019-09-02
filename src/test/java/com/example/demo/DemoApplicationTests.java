@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.entity.Order;
+import com.example.demo.entity.OrderItem;
 import com.example.demo.service.OrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,6 +60,10 @@ public class DemoApplicationTests {
 
         List<Integer> listTest = orderService.getTest();
         assertTrue(listTest.size() > 0);
+
+        List<OrderItem> orderItemList = orderService.getOrderItemByOrderId(1);
+        assertTrue(orderItemList.size() > 0);
+        System.out.println(orderItemList.toString());
 
     }
 }

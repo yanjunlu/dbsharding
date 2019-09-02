@@ -54,16 +54,26 @@ spring:
         sharding:
             tables:
                 t_order:
-                    actual-data-nodes: ds.t_order$->{0..1}
+                    actual-data-nodes: ds.t_order_$->{0..1}
                     table-strategy:
                         inline:
-                            algorithm-expression: t_order$->{order_id % 2}
+                            algorithm-expression: t_order_$->{order_id % 2}
                             sharding-column: order_id
-
+                t_order_item:
+                    actual-data-nodes: ds.t_order_item_$->{0..1}
+                    table-strategy:
+                        inline:
+                            algorithm-expression: t_order_item_$->{order_id % 2}
+                            sharding-column: order_id
+            bindingTables:
+                - t_order,t_order_item
+            broadcastTables:
+                - t_test
             master-slave-rules:
                 ds:
                     master-data-source-name: master
-                    slave-data-source-names: slave
+                    slave-data-source-names:
+                        - slave
 
 mybatis:
     mapper-locations: classpath:mapper/*.xml

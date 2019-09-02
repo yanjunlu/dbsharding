@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.entity.Order;
+import com.example.demo.entity.OrderItem;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,6 @@ public interface OrderDao {
     int updateById(long orderId);
 
     List<Integer> getTest();
+
+    List<OrderItem> getOrderItemByOrderId(long orderId);
 }
