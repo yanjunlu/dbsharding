@@ -63,7 +63,7 @@ public class DemoApplicationTests {
 
         List<OrderItem> orderItemList = orderService.getOrderItemByOrderId(1);
         assertTrue(orderItemList.size() > 0);
-        System.out.println(orderItemList.toString());
+        orderItemList.stream().forEach(orderItem -> System.out.println(orderItem.toString()));
 
     }
 }

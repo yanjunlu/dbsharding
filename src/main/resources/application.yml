@@ -57,13 +57,13 @@ spring:
                     actual-data-nodes: ds.t_order_$->{0..1}
                     table-strategy:
                         inline:
-                            algorithm-expression: t_order_$->{order_id % 2}
+                            algorithm-expression: t_order_$->{(order_id >> 0) % 2}
                             sharding-column: order_id
                 t_order_item:
                     actual-data-nodes: ds.t_order_item_$->{0..1}
                     table-strategy:
                         inline:
-                            algorithm-expression: t_order_item_$->{order_id % 2}
+                            algorithm-expression: t_order_item_$->{(order_id >> 0) % 2}
                             sharding-column: order_id
             bindingTables:
                 - t_order,t_order_item

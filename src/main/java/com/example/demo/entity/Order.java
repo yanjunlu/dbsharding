@@ -20,4 +20,10 @@ public class Order {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+    @Override
+    public String toString() {
+        return "(orderId: " + orderId + ", "
+                + "remark: " + remark + ")";
+    }
 }

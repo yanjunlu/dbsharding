@@ -30,4 +30,11 @@ public class OrderItem {
     public void setOrderItemId(long orderItemId) {
         this.orderItemId = orderItemId;
     }
+
+    @Override
+    public String toString() {
+        return "(orderId: " + orderId + ", "
+                + "orderItemId: " + orderItemId + ", "
+                + "remark: " + remark + ")";
+    }
 }

@@ -13,9 +13,13 @@
         <result column="order_id" property="orderId" jdbcType="DECIMAL" />
         <result column="remark" property="remark" jdbcType="VARCHAR" />
     </resultMap>
-
+<!--    SELECT a.* FROM t_order_item a, t_order b WHERE a.order_id = b.order_id and a.order_id = #{orderId} order by order_item_id;-->
     <select id="getOrderItemByOrderId" resultMap="OrderItemResultMap">
-        SELECT a.* FROM t_order_item a, t_order b WHERE a.order_id = b.order_id and a.order_id = #{orderId} order by order_item_id;
+        SELECT a.* FROM t_order_item a
+        inner join t_order b on a.order_id = b.order_id
+        left join test c on a.order_id = c.id
+        WHERE a.order_id >= #{orderId} order by order_item_id;
+
     </select>
 
     <select id="getById" resultMap="BaseResultMap">
